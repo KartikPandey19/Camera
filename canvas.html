@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cnavas</title>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="board"></canvas>
+    
+</body>
+<script>
+    let board = document.querySelector('#board');
+    board.height = window.innerHeight;
+    board.width = window.innerWidth;
+    let tool = board.getContext('2d');
+    tool.fillStyle = 'green';
+    
+    tool.fillRect(10,10,board.width/2,board.height/2);
+    tool.strokeRect(80,80,board.width/2,board.height/2);
+
+    tool.beginPath();
+    tool.moveTo(80,20);
+    tool.lineTo(90,50)
+    tool.stroke();
+</script>
+</html>
