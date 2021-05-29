@@ -52,6 +52,9 @@ navigator.mediaDevices.getUserMedia(constraints)
       tool.drawImage(videoPlayer,0,0);
       let link = document.createElement('a');
       link.download = 'image.jpg';
-       
+      link.href =c.toDataURL ();
+       link.click();
+       link.remove();
+       c.remove( );
 
   }
