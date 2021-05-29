@@ -4,6 +4,15 @@
 body{
     margin:0;
 }
+#click-picture{
+    height:4rem;
+    width:4rem;
+    position: fixed;
+    right:6rem;
+    top:56vh;
+    border-radius: 50%;
+    border:none;
+}
 .video-container{
     height:100vh;
     width:100vw;

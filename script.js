@@ -2,6 +2,7 @@ let constraints = { video: true, audio: true };
 let videoPlayer = document.querySelector('video');
 let audioPlayer = document.querySelector('audio');
 let videoRecordBtn = document.querySelector('#record-video');
+let captureBtn = document.querySelector('#click-picture'); 
 let mediaRecorder;
 let recordState = false;
 let chunks = [];
@@ -40,3 +41,17 @@ navigator.mediaDevices.getUserMedia(constraints)
     .catch(function (err) {
         console.log(err);
     })
+  captureBtn.addEventListener('click',function(){
+      capture();
+  })
+  function capture(){ 
+      let c = document.createElement('canvas');
+      c.width = videoPlayer.videoWidth;
+      c.height = videoPlayer.videoHeight;
+      let tool = c.getContext('2d');
+      tool.drawImage(videoPlayer,0,0);
+      let link = document.createElement('a');
+      link.download = 'image.jpg';
+       
+
+  }
