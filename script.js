@@ -8,21 +8,22 @@ let recordState = false;
 let chunks = [];
 videoRecordBtn.addEventListener("click", function () {
     if (mediaRecorder != undefined) {
+        let innerDiv = videoRecordBtn.querySelector('#record-div');
         if (recordState == false) {
             recordState = true;
+            innerDiv.classList.add('recording-animation');
             mediaRecorder.start();
-            videoRecordBtn.innerText = 'Recording..'
         } else {
             recordState = false;
+            innerDiv.classList.remove('recording-animation');
             mediaRecorder.stop();
-            videoRecordBtn.innerText = 'Record';
         }
     }
 })
 navigator.mediaDevices.getUserMedia(constraints)
     .then(function (mediaStream) {
         videoPlayer.srcObject=mediaStream;
-        mediaRecorder = new MediaRecorder(mediaStream)
+        mediaRecorder = new MediaRecorder(mediaStream);
         mediaRecorder.ondataavailable = function (e) {
             chunks.push(e.data)
         }
@@ -42,7 +43,12 @@ navigator.mediaDevices.getUserMedia(constraints)
         console.log(err);
     })
   captureBtn.addEventListener('click',function(){
+      let innerDiv = captureBtn.querySelector('#click-div');
+      innerDiv.classList.add('capture-animation');
       capture();
+      setTimeout(function(){
+        innerDiv.classList.remove('capture-animation')
+    },1000);
   })
   function capture(){ 
       let c = document.createElement('canvas');

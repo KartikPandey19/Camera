@@ -26,14 +26,35 @@ body{
 }
 #record-video{
     position:fixed;
-    z-index: 10;
     right:6rem;
-    top :45vh;
+    top :36vh;
     border-radius: 50%;    
-    border:none;
-    height:4rem;
-    width: 4rem;
+    height:6rem;
+    width: 6rem;
+    background-color: black;
+    border:8px solid white
 }
+#click-picture{
+    position: fixed;
+    top: 50vh;
+    right:6rem;
+    height:6rem;
+    width: 6rem;
+    border-radius: 50%;
+    background-color: black;
+    border:8px solid white
+}
+#record-div,#click-div{
+    height:70%;
+    width: 80%;
+    margin:auto;
+    background-color: red;
+    border-radius: 50%;
+}
+#click-div{
+    background-color: white;
+}
+
 
 .filter{
     border:1px solid white;
@@ -51,4 +72,21 @@ body{
     flex-direction: column;
     height: 60vh;
     width:5.5vw;
+}
+.recording-animation{
+ animation: shrinkInOut 0.8s infinite;
+}
+.capture-animation{
+    animation: shrinkInOut 1s;
+}
+@keyframes shrinkInOut {
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.2);
+    }
+    100%{
+        transform:scale(1);
+    }
 }
