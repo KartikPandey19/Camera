@@ -6,8 +6,48 @@ let captureBtn = document.querySelector('#click-picture');
 let mediaRecorder;
 let recordState = false;
 let chunks = [];
+let filter = '';
+let currentZoom =1;
+let zoomInBtn = document.getElementById('in');
+let zoomOutBtn = document.getElementById('out');
+
+zoomInBtn.addEventListener('click',function(){
+    
+})
+
+
+let allFilter  =document.querySelectorAll('.filter');
+for(let i =0;i<allFilter.length;i++){
+    allFilter[i].addEventListener('click',function(e){
+        filter= e.currentTarget.style.backgroundColor;
+        removeFilter();
+        addFilterToStream(filter);
+    })
+}
+
+function addFilterToStream(filterColor){
+    let filter = document.createElement('div');
+    filter.classList.add('on-screen-filter')
+     filter.style.height='100vh';
+     filter.style.width='100vw';
+     filter.style.backgroundColor=`${filterColor}`;
+     filter.style.position = 'fixed';
+     filter.style.top = '0px';
+     document.querySelector('body').appendChild(filter);
+}
+
+function removeFilter(){
+    let element = document.querySelector('.on-screen-filter');
+    if(element){
+        element.remove();
+    }  
+}
+
+
+
 videoRecordBtn.addEventListener("click", function () {
     if (mediaRecorder != undefined) {
+        removeFilter();
         let innerDiv = videoRecordBtn.querySelector('#record-div');
         if (recordState == false) {
             recordState = true;
@@ -45,7 +85,7 @@ navigator.mediaDevices.getUserMedia(constraints)
   captureBtn.addEventListener('click',function(){
       let innerDiv = captureBtn.querySelector('#click-div');
       innerDiv.classList.add('capture-animation');
-      capture();
+      capture(filter);
       setTimeout(function(){
         innerDiv.classList.remove('capture-animation')
     },1000);
@@ -56,6 +96,10 @@ navigator.mediaDevices.getUserMedia(constraints)
       c.height = videoPlayer.videoHeight;
       let tool = c.getContext('2d');
       tool.drawImage(videoPlayer,0,0);
+      if(filter!=''){
+          tool.fillStyle = filter;
+          tool.fillRect(0,0,c.width,c.height);
+      }
       let link = document.createElement('a');
       link.download = 'image.jpg';
       link.href =c.toDataURL ();
