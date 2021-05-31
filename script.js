@@ -12,8 +12,23 @@ let zoomInBtn = document.getElementById('in');
 let zoomOutBtn = document.getElementById('out');
 
 zoomInBtn.addEventListener('click',function(){
-    
-})
+  let videoScale = Number(
+  videoPlayer.style.transform.split("(")[1].split(")")[0]  
+  )
+  if(videoScale<3){
+      currentZoom = videoScale+0.1;
+      videoPlayer.style.transform=`scale(${currentZoom})`;
+  }
+});
+zoomOutBtn.addEventListener('click',function(){
+    let videoScale = Number(
+    videoPlayer.style.transform.split("(")[1].split(")")[0]  
+    )
+    if(videoScale>1){
+        currentZoom = videoScale-0.1;
+        videoPlayer.style.transform=`scale(${currentZoom})`;
+    }
+  });
 
 
 let allFilter  =document.querySelectorAll('.filter');
@@ -52,6 +67,8 @@ videoRecordBtn.addEventListener("click", function () {
         if (recordState == false) {
             recordState = true;
             innerDiv.classList.add('recording-animation');
+            currentZoom=1 
+            videoPlayer.style.transform = `scale(${currentZoom})`  
             mediaRecorder.start();
         } else {
             recordState = false;
@@ -95,6 +112,12 @@ navigator.mediaDevices.getUserMedia(constraints)
       c.width = videoPlayer.videoWidth;
       c.height = videoPlayer.videoHeight;
       let tool = c.getContext('2d');
+    //   origin shifting
+    tool.translate(c.width/2,c.height/2)
+    // scaling
+    tool.scale(currentZoom,currentZoom);
+    //  move back to origin
+    tool.translate(-c.width/2,-c.height/2);
       tool.drawImage(videoPlayer,0,0);
       if(filter!=''){
           tool.fillStyle = filter;
