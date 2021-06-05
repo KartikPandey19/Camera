@@ -127,3 +127,7 @@ function capture() {
   link.remove();
   c.remove();
 }
+
+
+
+let y=0;
