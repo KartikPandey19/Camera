@@ -86,7 +86,7 @@ navigator.mediaDevices
       let blob = new Blob(chunks, { type: "video/mp4" });
       chunks = [];
       addMediaToGallery(blob,'video');
-      
+       
     };
   })
   .catch(function (err) {
@@ -119,6 +119,7 @@ function capture() {
   addMediaToGallery(c.toDataURL(),'img');
   c.remove();
 }
+
 
 
 
